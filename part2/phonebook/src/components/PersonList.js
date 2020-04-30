@@ -1,11 +1,7 @@
 import React from 'react';
+import Person from './Person';
 
-const PersonList = ({ list }) => {
-  return list.map((person) => (
-    <p>
-      {person.name} - {person.number}
-    </p>
-  ));
-};
+const PersonList = ({ list }) =>
+  list.map((person) => <Person key={person.id} person={person} />);
 
 export default PersonList;
