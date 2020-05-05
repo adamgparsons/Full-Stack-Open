@@ -5,11 +5,16 @@
   "author": "Adam Parsons",
   "license": "MIT",
   "scripts": {
+    "build:ui": "rm -rf build && cd ../../part2/notes  && npm run build --prod && cp -r build ../../part3/intro-to-node",
+    "deploy": "git push heroku master",
+    "deploy:full": "yarn build:ui && git add . && git commit -m uibuild && yarn deploy",
+    "logs:prod": "heroku logs --tail",
     "start": "node index.js",
     "dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1"
   },
   "devDependencies": {

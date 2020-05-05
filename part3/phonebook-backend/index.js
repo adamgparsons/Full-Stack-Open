@@ -1,12 +1,15 @@
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
+const cors = require('cors');
+app.use(cors());
+app.use(express.static('build'));
+app.use(express.json());
 app.use(
   morgan(
     ':method :url  status :req[content-length] - :response-time ms :post-request-log'
   )
 );
-app.use(express.json());
 
 morgan.token('post-request-log', (req, res) => {
   if (('req', req.route.methods.post)) {
@@ -93,7 +96,7 @@ app.post('/api/persons', (request, response) => {
 });
 
 app.get('/api/persons', (request, response) => {
-  response.json(persons.length);
+  response.json(persons);
 });
 
 const unknownEndpoint = (request, response) => {
@@ -102,7 +105,7 @@ const unknownEndpoint = (request, response) => {
 
 app.use(unknownEndpoint);
 
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
