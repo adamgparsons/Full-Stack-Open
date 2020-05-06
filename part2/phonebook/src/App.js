@@ -41,7 +41,7 @@ const App = () => {
       const foundPerson = persons.find((person) => person.name === name);
       const foundPersonID = foundPerson.id;
       const updatedPerson = { ...foundPerson, number: newNumber };
-
+      console.log(foundPersonID);
       personsServices
         .update(foundPersonID, updatedPerson)
         .then((returnedPerson) => {
@@ -85,6 +85,7 @@ const App = () => {
     const personsToShow = persons.filter((person) =>
       person.name.toLowerCase().includes(nameToSearch.toLowerCase())
     );
+
     setPersonsShown(personsToShow);
   };
 

@@ -1,7 +1,0 @@
-../../part2/phonebook
-../../part3/phonebook-backend
-
-
-
-
-rm -rf build && cd ../../part2/phonebook && npm run build --prod && cp -r build../../part3/phonebook-backend 

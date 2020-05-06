@@ -19,8 +19,9 @@ const deletePerson = (personID) => {
 
 const update = (personID, newObject, showError) => {
   const request = Axios.put(`${baseUrl}/${personID}`, newObject);
-  return request.then((response) => response.data);
-  // .catch((error) => showError());
+  return request
+    .then((response) => response.data)
+    .catch((error) => showError());
 };
 
 export default { getAll, create, deletePerson, update };
