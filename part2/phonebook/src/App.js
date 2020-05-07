@@ -64,18 +64,20 @@ const App = () => {
       number: newNumber,
     };
 
-    // Axios.post('http://localhost:6001/persons', newPerson).then((response) => {
-    //   setPersons(persons.concat(response.data));
-    // });
-    personsServices.create(newPerson).then((returnedPersons) => {
-      setPersons(persons.concat(returnedPersons));
-      setMessage('success');
-      setTimeout(() => {
-        setMessage(null);
-      }, 3000);
-    });
-    setNewName('');
-    setNewNumber('');
+    personsServices
+      .create(newPerson)
+      .then((returnedPersons) => {
+        setPersons(persons.concat(returnedPersons));
+        setMessage('success');
+        setNewName('');
+        setNewNumber('');
+        setTimeout(() => {
+          setMessage(null);
+        }, 3000);
+      })
+      .catch((error) => {
+        setMessage(error.response.data);
+      });
   };
 
   const handleNameSearch = (event) => {
@@ -123,8 +125,11 @@ const App = () => {
           {newName} has already been removed from the server
         </div>
       );
-    } else {
+    }
+    if (message === null) {
       return null;
+    } else {
+      return <div className="fail">{message}</div>;
     }
   };
   return (
